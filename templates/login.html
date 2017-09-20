@@ -1,0 +1,15 @@
+{% extends 'default.html'%}
+
+{% block content %}
+  <h2>Login</h2>
+  <h4>
+    {% if error %}
+      <span style="color:red">{{ error }}</span>
+    {% endif %}
+  </h4>
+  <form method="POST" action="">
+    <input type="text" name="username" placeholder="Your username">
+    <input type="password" name="password" placeholder="Enter your password">
+    <input type="submit" value="Se connecter">
+  </form>
+{% endblock %}

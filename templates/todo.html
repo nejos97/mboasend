@@ -1,0 +1,15 @@
+{% extends 'default.html'%}
+
+{% block content %}
+  <h2>My todo list</h2>
+  <h4><a href="{{ url_for("logout") }}">Logout</a></h4>
+  <form method="POST" action="">
+    <input type="text" name="item" placeholder="New item">
+    <input type="submit" value="Save to my list">
+  </form>
+  <ul>
+    {% for t in todo %}
+      <li class="item">{{ t }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
