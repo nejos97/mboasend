@@ -1,9 +1,11 @@
 import os,sys
-from flask import Flask,render_template,request,redirect,url_for,flash,make_response,session
+from flask import Flask,render_template,request,redirect,url_for,flash,make_response,session,send_file
+from werkzeug import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "Hello"
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600*24*30
+path = "/home/nejos97/PycharmProjects/pyUpload/uploads"
 
 @app.route("/")
 def index():
@@ -25,10 +27,25 @@ def todo():
     t.reverse()
     return render_template("todo.html", title="Todo list", todo = t)
 
-@app.route("/upload")
+@app.route("/upload", methods=["GET","POST"])
 def upload():
+    if request.method == "POST" :
+        fichier = request.files["fichier"]
+        if fichier :
+            nom = secure_filename(fichier.filename)
+            fichier.save("./uploads/"+nom)
+            flash("File uploaded with success")
+
     liste = os.listdir("uploads")
-    return render_template("uploads.html",title="Uploads", fichiers = liste)
+    tmp = {}
+    for e in liste :
+        tmp[e] = path+"/"+e
+    return render_template("uploads.html",title="Uploads", fichiers = tmp)
+
+@app.route("/download/<p>")
+def download(p):
+    chemin = path+"/"+p
+    return send_file(chemin)
 
 @app.route("/about")
 def about():
