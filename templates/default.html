@@ -1,8 +1,21 @@
 <html>
   <head>
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
   </head>
   <body>
+    <!-- block for nav if user is authenticated -->
+    {% if "auth" in session %}
+      <ul class="allitem">
+        <a  href="{{url_for("index")}}"><li class="item">Home</li></a>
+        <a  href="{{url_for("todo")}}"><li class="item">Todo list</li></a>
+        <a  href="{{url_for("upload")}}"><li class="item">File upload</li></a>
+        <a  href="{{url_for("about")}}"><li class="item">About</li></a>
+        <a  href="{{url_for("logout")}}"><li class="item">logout</li></a>
+      </ul>
+    {% endif %}
+
+    <!-- Block for flash message -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
@@ -10,8 +23,11 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+
+    <!-- Block for content -->
     <div class="content">
       {% block content %}{% endblock %}
     </div>
+    <script type="text/javascript" src="{{ url_for('static',filename='main.js') }}">
   </body>
 </html>

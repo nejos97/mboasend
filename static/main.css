@@ -1,0 +1,18 @@
+.allitem
+{
+  list-style-type: none;
+  background-color: #333;
+}
+.item
+{
+  display: inline;
+  padding: 14px 16px;
+  margin: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.element
+{
+  
+}

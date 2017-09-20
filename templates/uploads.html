@@ -1,0 +1,12 @@
+{% extends 'default.html'%}
+
+{% block content %}
+  <h2>Your uploaded files</h2>
+  <form method="POST">
+    <input type="file" name="fichier">
+    <input type="submit" value="Send file">
+  </form>
+  {% for f in fichiers %}
+    {{ f }}<br>
+  {% endfor %}
+{% endblock %}
