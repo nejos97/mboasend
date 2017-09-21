@@ -29,17 +29,24 @@ def todo():
 
 @app.route("/upload", methods=["GET","POST"])
 def upload():
+    if not "auth" in session:
+        return make_response(redirect(url_for("login")))
+
     if request.method == "POST" :
         fichier = request.files["fichier"]
-        if fichier :
+        if fichier and not fichier.filename == '':
             nom = secure_filename(fichier.filename)
             fichier.save("./uploads/"+nom)
             flash("File uploaded with success")
+        else:
+            flash("File input is empty or is deleted")
+            redirect(request.url)
 
     liste = os.listdir("uploads")
     tmp = {}
     for e in liste :
-        tmp[e] = path+"/"+e
+        if os.path.isfile("uploads/"+e):
+            tmp[e] = path+"/"+e
     return render_template("uploads.html",title="Uploads", fichiers = tmp)
 
 @app.route("/download/<p>")
