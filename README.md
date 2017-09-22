@@ -11,7 +11,7 @@ it's a web applicationl with flask.
 
 For use this application lacally, yous should firstly have python installed to your cumputer. it's installed if using linux distributuion; for windows, you can find how to install it online.
 
-After installing pyhton create a vistual environment.
+After installing pyhton create a virtual environment.
 
 ```bash
 cd /
@@ -44,11 +44,12 @@ Jinja2==2.9.6
 MarkupSafe==1.0
 olefile==0.44
 Werkzeug==0.12.2
+
 ```
 
 now your locally repo is ready to launch but let's set some config.
 
-open \`app.py\` with your text editor
+open `app.py` with your text editor
 
 ```py
 path = "/path/to/the/pyUpload/uploads"
@@ -74,4 +75,4 @@ pyhon3 app.py
 * Debugger PIN: 758-570-599
 ```
 
-open your browser and write \`[http://localhost:5000/\`]
+open your browser and write `http://localhost:5000/`
