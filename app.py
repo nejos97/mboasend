@@ -15,6 +15,7 @@ def index():
 @app.route("/todo/", methods=['GET','POST'])
 def todo():
     if not "auth" in session :
+        flash("Please login firstly")
         return redirect(url_for("login"))
     t=[]
     with open("donnee.dat","r") as f :
@@ -30,6 +31,7 @@ def todo():
 @app.route("/upload", methods=["GET","POST"])
 def upload():
     if not "auth" in session:
+        flash("Please login firstly")
         return make_response(redirect(url_for("login")))
 
     if request.method == "POST" :

@@ -1,6 +1,4 @@
-#
-pyUpload
-
+#pyUpload
 ---
 
 it's a web applicationl with flask.
@@ -65,7 +63,7 @@ if request.form['username']=="m" and request.form['password']=="m" :
 now all is set you can run application
 
 ```
-cd pyThon
+cd pyUpload
 pyhon3 app.py
 
 #output exemple
@@ -76,4 +74,4 @@ pyhon3 app.py
 * Debugger PIN: 758-570-599
 ```
 
-open your browser and write \`[http://localhost:5000/\`](http://localhost:5000/`)![](/assets/import.png)
+open your browser and write \`[http://localhost:5000/\`]

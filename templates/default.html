@@ -13,6 +13,14 @@
         <a  href="{{url_for("about")}}"><li class="item">About</li></a>
         <a  href="{{url_for("logout")}}"><li class="item">logout</li></a>
       </ul>
+    {% else %}
+      <ul class="allitem">
+        <a  href="{{url_for("index")}}"><li class="item">Home</li></a>
+        <a  href="{{url_for("todo")}}"><li class="item">Todo list</li></a>
+        <a  href="{{url_for("upload")}}"><li class="item">File upload</li></a>
+        <a  href="{{url_for("about")}}"><li class="item">About</li></a>
+        <a  href="{{url_for("login")}}"><li class="item">login</li></a>
+      </ul>
     {% endif %}
 
     <!-- Block for flash message -->
