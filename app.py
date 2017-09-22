@@ -37,9 +37,14 @@ def upload():
     if request.method == "POST" :
         fichier = request.files["fichier"]
         if fichier and not fichier.filename == '':
-            nom = secure_filename(fichier.filename)
-            fichier.save("./uploads/"+nom)
-            flash("File uploaded with success")
+            ext = fichier.filename.split('.')[-1]
+            if ext.lower() in ["png","jpg","jpeg","gif",""]:
+                nom = secure_filename(fichier.filename)
+                fichier.save("./uploads/"+nom)
+                flash("File uploaded with success")
+            else :
+                flash("Extension is not allowed. Please choose another file")
+                redirect(request.url)
         else:
             flash("File input is empty or is deleted")
             redirect(request.url)
