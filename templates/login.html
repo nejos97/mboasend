@@ -7,9 +7,23 @@
       <span style="color:red">{{ error }}</span>
     {% endif %}
   </h4>
-  <form method="POST" action="">
-    <input type="text" name="username" placeholder="Your username">
-    <input type="password" name="password" placeholder="Enter your password">
-    <input type="submit" value="Se connecter">
-  </form>
+  <div class="ui two column centered grid">
+    <div class="column">
+      <form method="post" action="">
+        <div class="ui tiny form">
+          <div class="two fields">
+            <div class="field">
+              <label>Username</label>
+              <input type="text" name="username" placeholder="Your username">
+            </div>
+            <div class="field">
+              <label>Pasword</label>
+              <input type="password" name="password" placeholder="Enter your password">
+            </div>
+          </div>
+          <button class="ui teal submit button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
 {% endblock %}

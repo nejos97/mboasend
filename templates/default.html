@@ -1,27 +1,37 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='semantic/semantic.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
   </head>
   <body>
     <!-- block for nav if user is authenticated -->
-    {% if "auth" in session %}
-      <ul class="allitem">
-        <a  href="{{url_for("index")}}"><li class="item">Home</li></a>
-        <a  href="{{url_for("todo")}}"><li class="item">Todo list</li></a>
-        <a  href="{{url_for("upload")}}"><li class="item">File upload</li></a>
-        <a  href="{{url_for("about")}}"><li class="item">About</li></a>
-        <a  href="{{url_for("logout")}}"><li class="item">logout</li></a>
-      </ul>
-    {% else %}
-      <ul class="allitem">
-        <a  href="{{url_for("index")}}"><li class="item">Home</li></a>
-        <a  href="{{url_for("todo")}}"><li class="item">Todo list</li></a>
-        <a  href="{{url_for("upload")}}"><li class="item">File upload</li></a>
-        <a  href="{{url_for("about")}}"><li class="item">About</li></a>
-        <a  href="{{url_for("login")}}"><li class="item">login</li></a>
-      </ul>
-    {% endif %}
+    <div class="ui tiny menu">
+      <a href="{{url_for('index')}}" class="item">Home</a>
+      <a href="{{url_for('todo')}}" class="item">Todo list</a>
+      <a href="{{url_for('upload')}}" class="item">File upload</a>
+      <a href="{{url_for('about')}}" class="item">About</a>
+      <div class="right menu">
+        {% if "auth" in session %}
+          <div class="item">
+            <a href="{{url_for('logout')}}" style="margin:0px">
+              <button class="ui primary button">
+                Logout
+              </button>
+            </a>
+          </div>
+        {% else %}
+          <div class="item">
+            <a href="{{url_for('login')}}" style="margin:0px">
+              <button class="ui primary button">
+                Login
+              </button>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
 
     <!-- Block for flash message -->
     {% with messages = get_flashed_messages() %}
@@ -31,11 +41,12 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-
     <!-- Block for content -->
     <div class="content">
       {% block content %}{% endblock %}
     </div>
-    <script type="text/javascript" src="{{ url_for('static',filename='main.js') }}">
+    <script type="text/javascript" src="{{ url_for('static',filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='semantic/semantic.min.js') }}"></script>
   </body>
 </html>
