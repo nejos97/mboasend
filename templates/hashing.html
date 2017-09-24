@@ -10,15 +10,15 @@
             <textarea rows="2" name="texte" placeholder="Enter your text here for hashing" autofocus>{{ result.text }}</textarea>
           </div>
           <div class="field">
-            <label>MD5</label>
+            <label>MD5 ({{ result.md5|length}} caracteres)</label>
             <input type="text" value="{{ result.md5 }}" disabled>
           </div>
           <div class="field">
-            <label>SHA1</label>
+            <label>SHA1 ({{ result.sha1|length}} caracteres)</label>
             <input type="text" value="{{ result.sha1 }}" disabled>
           </div>
           <div class="field">
-            <label>SHA512</label>
+            <label>SHA512 ({{ result.sha512|length}} caracteres) </label>
             <input type="text" value="{{ result.sha512 }}" disabled>
           </div>
           <div class="field">
