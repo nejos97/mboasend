@@ -1,6 +1,7 @@
 import os,sys
 from flask import Flask,render_template,request,redirect,url_for,flash,make_response,session,send_file
 from werkzeug import secure_filename
+import hashlib
 
 app = Flask(__name__)
 app.secret_key = "Hello"
@@ -61,9 +62,21 @@ def download(p):
     chemin = path+"/"+p
     return send_file(chemin)
 
+@app.route("/hashing", methods=["GET","POST"])
+def hashing():
+    r = {}
+    if request.method == "POST":
+        text = request.form["texte"].encode()
+        r["text"] = text.decode()
+        r["md5"] = hashlib.md5(text).hexdigest()
+        r["sha1"] = hashlib.sha1(text).hexdigest()
+        r["sha512"] = hashlib.sha512(text).hexdigest()
+        flash("hashing result")
+    return render_template("hashing.html",title="Test de hashage", result=r)
+
 @app.route("/about")
 def about():
-    pass
+    return "nejos97"
 
 @app.route("/login/",methods=['GET','POST'])
 def login():

@@ -1,0 +1,31 @@
+{% extends 'default.html'%}
+
+{% block content %}
+  <div class="ui two column centered grid">
+    <div class="column">
+      <form method="post" action="">
+        <div class="ui form">
+          <div class="field">
+            <label>Text</label>
+            <textarea rows="2" name="texte" placeholder="Enter your text here for hashing" autofocus>{{ result.text }}</textarea>
+          </div>
+          <div class="field">
+            <label>MD5</label>
+            <input type="text" value="{{ result.md5 }}" disabled>
+          </div>
+          <div class="field">
+            <label>SHA1</label>
+            <input type="text" value="{{ result.sha1 }}" disabled>
+          </div>
+          <div class="field">
+            <label>SHA512</label>
+            <input type="text" value="{{ result.sha512 }}" disabled>
+          </div>
+          <div class="field">
+            <input type="submit" class="ui teal submit button" value="Hash">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
