@@ -2,8 +2,12 @@ import os,sys
 from flask import Flask,render_template,request,redirect,url_for,flash,make_response,session,send_file
 from werkzeug import secure_filename
 import hashlib
+from weather_location import *
+import json
 
 app = Flask(__name__)
+app.jinja_env.globals.update(get_icon=get_icon)
+app.jinja_env.globals.update(get_date=get_date) 
 app.secret_key = "Hello"
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600*24*30
 path = "/home/nejos97/PycharmProjects/pyUpload/uploads"
@@ -98,6 +102,16 @@ def logout():
         flash("You were successfully logout")
         session.pop("auth",None)
     return redirect(url_for("login"))
+
+@app.route("/weather/")
+def weather():
+    if not "auth" in session :
+        flash("Please login firstly")
+        return make_response(redirect(url_for("login")))
+    d = get_coordonates()
+    data = json.loads(d)
+    meteo = json.loads(get_weather(data["lon"],data["lat"]))
+    return render_template("weather.html",title="Weather of your location", ip=json.loads(d), meteo=meteo)
 
 @app.errorhandler(404)
 def error404(error):
