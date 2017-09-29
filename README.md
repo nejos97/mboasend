@@ -58,7 +58,7 @@ path = "/path/to/the/pyUpload/uploads"
 set password to connect to default account
 
 ```py
-if request.form['username']=="m" and request.form['password']=="m" :
+if request.form['username']=="test" and request.form['password']=="tes" :
 ```
 
 now all is set you can run application
