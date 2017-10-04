@@ -8,7 +8,7 @@ import json
 app = Flask(__name__)
 app.jinja_env.globals.update(get_icon=get_icon)
 app.jinja_env.globals.update(get_date=get_date) 
-app.secret_key = "Hello"
+app.secret_key = "2d263e2b15a0fd27d2a53d3cfaebcdf2"
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600*24*30
 path = "/home/nejos97/PycharmProjects/pyUpload/uploads"
 
