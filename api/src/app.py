@@ -1,7 +1,20 @@
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+from .models.database import SessionLocal, engine, Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 origins = [
     "http://localhost:3000",
@@ -17,7 +30,7 @@ app.add_middleware(
 )
 
 @app.get("/healthcheck", status_code=status.HTTP_200_OK)
-async def perform_healthcheck() -> dict:
+async def perform_healthcheck(db: Session = Depends(get_db)) -> dict:
     '''
     Simple route for the healthcheck.
     It basically sends a GET request to the route & hopes to get a "200"
@@ -30,4 +43,8 @@ async def perform_healthcheck() -> dict:
       'healtcheck': 'Everything OK!'
     }
     '''
+    try:
+        db.execute('SELECT 1')
+    except:
+        raise HTTPException(status_code=503, detail="Database connection failed")
     return {'healthcheck': 'Everything OK!'} 
